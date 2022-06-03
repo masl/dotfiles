@@ -1,0 +1,8 @@
+{{- $name := promptString "GitHub name" -}}
+{{- $email := promptString "GitHub email" -}}
+{{- $signingkey := promptString "GitHub GPG signingkey" -}}
+
+[data.git]
+    name = {{ $name | quote }}
+    email = {{ $email | quote }}
+    signingkey = {{ $signingkey | quote }}
