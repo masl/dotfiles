@@ -1,11 +1,18 @@
 {{- $name := promptString "GitHub name" -}}
 {{- $email := promptString "GitHub email" -}}
-{{- $signingkey := promptString "GitHub GPG signingkey" -}}
+{{- $usegpg := promptBool "Use GPG signing? (y/n)" -}}
+{{ $signingkey := "" }}
+{{ if $usegpg }}
+    {{ $signingkey = promptString "GitHub GPG signingkey" }}
+{{ end }}
 
 [data.git]
     name = {{ $name | quote }}
     email = {{ $email | quote }}
+    usegpg = {{ $usegpg }} 
+{{ if $usegpg }}
     signingkey = {{ $signingkey | quote }}
+{{ end }}
 
 [edit]
     command = "nvim"

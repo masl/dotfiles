@@ -1,7 +1,7 @@
 [user]
 	name = {{ .git.name }}
 	email = {{ .git.email }}
-	signingkey = {{ .git.signingkey }} 
+    {{ if .git.usegpg }}signingkey = {{ .git.signingkey }}{{ end }}
 
 [alias]
 	graph = log --all --graph --decorate --oneline
@@ -9,8 +9,8 @@
 	remotes = remote -v
 	whoami = config user.email
 
-[commit]
+{{ if .git.usegpg }}[commit]
 	gpgsign = true
 
 [gpg]
-	program = /bin/gpg2
+	program = /bin/gpg2{{ end }}
